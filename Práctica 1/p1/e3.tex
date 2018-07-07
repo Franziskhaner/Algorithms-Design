@@ -1,0 +1,24 @@
+\begin{lstlisting}
+ List<Celda>::iterator celdaActual = listaCeldas.begin();
+	List<Defense*>::iterator defensaActual = defenses.begin();
+	bool colocada=false;
+	int col, fil;
+	
+	while(celdaActual != listaCeldas.end() && colocada==false){
+
+		seleccionCelda(matrizCeldas, nCellsWidth, (*celdaActual));	
+
+		if(esFactible(obstacles, defensasColocadas, mapWidth, mapHeight, (*defensaActual), (*celdaActual))){
+
+			(*defensaActual)->position.x = (*celdaActual).pos.x;
+			(*defensaActual)->position.y = (*celdaActual).pos.y;
+			(*defensaActual)->position.z = (*celdaActual).pos.z;
+		    defensasColocadas.push_back((*defensaActual));
+		    colocada = true;	
+    		
+    		col = (*celdaActual).id % nCellsWidth;	
+    		fil = (*celdaActual).id / nCellsWidth;	
+    	}
+    	celdaActual++;
+    }
+\end{lstlisting}

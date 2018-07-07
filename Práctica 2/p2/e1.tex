@@ -1,0 +1,3 @@
+$$ f(damage,range,attacksPerSecond,health,radio)=1.7*(damage+range+attacksPerSecond)+1.3*(\frac{health}{radio}) $$
+
+Para calcular el valor de cada defensa he supuesto que son más importantes las defensas con mayor daño de ataque, rango y velocidad de ataque para una mejor estrategia defensiva, por eso damos una ponderación mayor a la suma de estos 3 parámetros (1,7) y el valor restante (1,3) se lo he asignado a la relación vida/radio de la defensa, ya que considero más valiosas aquellas defensas cuya vida es mayor en relación al radio que tienen, puesto que al ser más pequeñas y tener más vida pueden ser menos vulnerables a los ataques de los ucos.

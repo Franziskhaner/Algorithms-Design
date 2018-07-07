@@ -1,0 +1,19 @@
+\begin{lstlisting}
+	celdaActual = listaCeldas.begin();
+	defensaActual = ++defenses.begin();
+
+	while(defensaActual != defenses.end() && celdaActual != listaCeldas.end()) {
+
+		seleccionCelda(matrizCeldas, nCellsWidth, (*celdaActual));	
+
+		if(esFactible(obstacles, defensasColocadas, mapWidth, mapHeight, (*defensaActual), (*celdaActual))){
+
+			(*defensaActual)->position.x = (*celdaActual).pos.x;
+			(*defensaActual)->position.y = (*celdaActual).pos.y;
+			(*defensaActual)->position.z = (*celdaActual).pos.z;
+            defensasColocadas.push_back((*defensaActual));
+			defensaActual++;
+		}
+		celdaActual++;
+	}
+\end{lstlisting}

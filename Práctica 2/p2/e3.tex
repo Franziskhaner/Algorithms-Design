@@ -1,0 +1,20 @@
+\begin{lstlisting}
+void mochila(std::list<Defense*> defenses, float** &TSP, unsigned int ases, float* valores, unsigned int* costes){
+
+	for(int j=0; j<ases; j++){	
+		if(j < costes[0])
+			TSP[0][j] = 0;
+		else
+			TSP[0][j] = valores[0];
+	}
+
+	for(int i=1; i<defenses.size(); i++){	
+		for(int j=0; j<ases; j++){
+			if(j < costes[i])
+				TSP[i][j] = TSP[i-1][j];
+			else
+				TSP[i][j] = std::max(TSP[i-1][j], TSP[i-1][j-costes[i]]+valores[i]);
+		}
+	}
+}
+\end{lstlisting}

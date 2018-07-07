@@ -1,0 +1,31 @@
+\begin{lstlisting}
+bool estaOrdenado(std::vector<Celda> v){
+
+    bool ordenado = true;
+    int comprobado = 0;
+    
+    for(int i=0; i<v.size() && (comprobado==0); i++){
+        if(v[i].valor < v[i+1].valor){
+        	comprobado++;
+            ordenado = false;
+        }
+	}
+	
+    return ordenado;
+}
+
+void cajaNegra(std::vector<Celda> v){
+	
+	ordenacionFusion(v, 0, v.size()-1);
+	if(estaOrdenado)
+    	std::cout << "EL algoritmo por fusion funciona correctamente." << std::endl ;
+    else
+    	std::cout << "Error, fusion no ordena correctamente." << std::endl;
+    	
+	ordenacionRapida(v, 0, v.size()-1);
+	if(estaOrdenado)
+    	std::cout << "El algoritmo por ordenacion rapida funciona correctamente." << std::endl ;
+    else
+    	std::cout << "Error, ordenacion rapida no ordena correctamente." << std::endl;
+}
+\end{lstlisting}

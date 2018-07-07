@@ -1,0 +1,137 @@
+\includegraphics[width=\textwidth]{grafica}
+
+
+\begin{lstlisting}
+ 
+    long int r1 = 0;
+	
+    c.activar();
+    do {	
+		List<Celda>::iterator currentCell = listaCeldas.begin();
+		List<Defense*>::iterator currentDefense = defenses.begin();
+
+		while(currentDefense != defenses.end() && currentCell != listaCeldas.end()) {
+			
+			sinPreOrdenacion(matrizCeldas, nCellsWidth, (*currentCell));
+			
+			if(esFactible(obstacles, defensasColocadas, mapWidth, mapHeight, (*currentDefense), (*currentCell))){
+				
+				(*currentDefense)->position.x = (*currentCell).pos.x;
+				(*currentDefense)->position.y = (*currentCell).pos.y;
+				(*currentDefense)->position.z = 0; 
+			    defensasColocadas.push_back((*currentDefense));
+				currentDefense++;
+			}
+			currentCell++;
+		}
+		++r1;
+	
+		for(int i=0; i<nCellsWidth; i++)
+			for(int j=0; j<nCellsWidth; j++){
+				matrizCeldas[i][j].valor = (int)defaultCellValue(i, j, freeCells, nCellsWidth, nCellsHeight
+				, mapWidth, mapHeight, obstacles, defenses);	//Damos valores de nuevo a nuestra matriz de celdas.
+			}
+
+    } while(c.tiempo() < e_abs/e_rel + e_abs);
+    c.parar();
+    
+    double tiempo_1 = c.tiempo();
+    
+    long int r2 = 0;
+    
+    c.activar();
+    do {	
+	    std::vector<Celda> vectorCeldas;
+	    
+    	for(int i=0; i<nCellsWidth; i++)
+    		for(int j=0; j<nCellsWidth; j++)
+    			vectorCeldas.push_back(matrizCeldas[i][j]); 
+		
+		ordenacionFusion(vectorCeldas, 0, vectorCeldas.size()-1);
+			
+		List<Defense*>::iterator currentDefense = defenses.begin();
+		
+		while(currentDefense != defenses.end()) {
+			
+			Celda currentCell = seleccion(vectorCeldas);
+
+			if(esFactible(obstacles, defensasColocadas, mapWidth, mapHeight, (*currentDefense), currentCell)){
+				(*currentDefense)->position.x = currentCell.pos.x;
+				(*currentDefense)->position.y = currentCell.pos.y;
+				(*currentDefense)->position.z = 0; 
+			    defensasColocadas.push_back((*currentDefense));
+				currentDefense++;
+			}
+		}
+		++r2;
+    } while(c.tiempo() < e_abs/e_rel + e_abs);
+    c.parar();
+    
+    double tiempo_2 = c.tiempo();
+
+    long int r3 = 0;
+    
+    c.activar();
+    do {
+    	std::vector<Celda> vectorCeldas;
+    
+		for(int i=0; i<nCellsWidth; i++)
+			for(int j=0; j<nCellsWidth; j++)
+			vectorCeldas.push_back(matrizCeldas[i][j]);
+    	
+    	ordenacionRapida(vectorCeldas, 0, vectorCeldas.size() - 1);
+    	
+		List<Defense*>::iterator currentDefense = defenses.begin();
+		
+		while(currentDefense != defenses.end()) {
+			
+			Celda currentCell = seleccion(vectorCeldas);
+			
+			if(esFactible(obstacles, defensasColocadas, mapWidth, mapHeight, (*currentDefense), currentCell)){
+				(*currentDefense)->position.x = currentCell.pos.x;
+				(*currentDefense)->position.y = currentCell.pos.y;
+				(*currentDefense)->position.z = 0; 
+			    defensasColocadas.push_back((*currentDefense));
+				currentDefense++;
+			}
+		}
+		++r3;
+    } while(c.tiempo() < e_abs/e_rel + e_abs);
+    c.parar();
+    
+    float tiempo_3 = c.tiempo();
+   
+    long int r4 = 0;
+    
+    c.activar();
+    do {	
+		std::vector<Celda> vectorCeldas;
+		
+		for(int i=0; i<nCellsWidth; i++)
+			for(int j=0; j<nCellsWidth; j++)
+				vectorCeldas.push_back(matrizCeldas[i][j]);
+				
+		monticulo(vectorCeldas);
+		
+		List<Defense*>::iterator currentDefense = defenses.begin();
+		
+		while(currentDefense != defenses.end()) {
+			
+			Celda currentCell = seleccion(vectorCeldas);
+			
+			if(esFactible(obstacles, defensasColocadas, mapWidth, mapHeight, (*currentDefense), currentCell)){
+				(*currentDefense)->position.x = currentCell.pos.x;
+				(*currentDefense)->position.y = currentCell.pos.y;
+				(*currentDefense)->position.z = 0; 
+			    defensasColocadas.push_back((*currentDefense));
+				currentDefense++;
+			}
+		}
+		++r4;
+    } while(c.tiempo() < e_abs/e_rel + e_abs);
+    c.parar(); 
+    
+    float tiempo_4 = c.tiempo();
+    
+    std::cout << (nCellsWidth * nCellsHeight) << '\t' << tiempo_1/r1 << '\t' << tiempo_2/r2 << '\t' << tiempo_3/r3 << '\t' << tiempo_4/r4 << std::endl;
+\end{lstlisting}

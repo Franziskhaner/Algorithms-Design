@@ -1,0 +1,45 @@
+\begin{lstlisting}
+void fusion(std::vector<Celda>& v, int i, int k, int j){
+	
+	int n = j - i + 1;
+	int p = i;
+	int q = k + 1;
+	
+	std::vector<Celda> w;
+	
+	for(int l=0; l<n; l++){
+		
+		if(p<=k && (q>j || v[p].valor > v[q].valor)){
+			w.push_back(v[p]);
+			p = p+1;
+		}
+		else{
+			w.push_back(v[q]);
+			q = q+1;	
+		}
+	}
+	
+	for(int l=0; l<n; l++)
+		v[i + l] = w[l];
+	
+}
+
+void ordenacionFusion(std::vector<Celda>& v, int i, int j){
+
+	int n = j - i + 1; 
+	
+ 	if(n <= 2){
+		if(v[i].valor < v[j].valor){
+			Celda aux = v[j];
+			v[j] = v[i];
+			v[i] = aux;
+		}
+	}
+	else{
+		int k = i - 1 + n/2;
+		ordenacionFusion(v, i, k);
+		ordenacionFusion(v, k+1, j);
+		fusion(v, i, k, j);
+	} 
+}
+\end{lstlisting}

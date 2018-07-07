@@ -1,0 +1,18 @@
+\begin{lstlisting}
+std::list<Defense*>::iterator it = --defenses.end();
+    int i = defenses.size()-1;
+	unsigned int j = ases-1;
+
+    while(j>0 && i>0) {
+        if(TSP[i][j] != TSP[i-1][j]) {	//Si el valor de la TSP de la defensa actual es distinto al de la anterior,
+	        selectedIDs.push_back((*it)->id);	//guardamos el id de la defenesa para luego colocarla
+	        j -= (*it)->cost;	//y restamos su coste a nuestro numero de ases totales
+	        it--;
+	        i--;
+        }
+        else{		//Si no, pasamos a la siguiente defensa.
+			it--;
+			i--;
+        }
+    }
+\end{lstlisting}

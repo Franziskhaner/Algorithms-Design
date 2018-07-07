@@ -1,0 +1,3 @@
+Mi función esFactible se encarga de comprobar que la posición de una celda es válida para colocar una defensa dada en ella. Para ello comprobamos en primer lugar que la celda no se encuentra en una posición fuera del mapa y si se da este caso devolvemos false.
+A continuación comprobamos que la defensa dada no colisiona con ninguna otra defensa que haya sido colocada antes, para cual aplicamos la fórmula de la distancia euclídea. Si dicha distancia entre las posiciones de ambas defensas es menor que la suma de sus radios, significa que hay colisión, por tanto devolvemos false. 
+Por último, utilizamos el mismo método que antes para comprobar si hay colisión con un obstáculo del mapa.

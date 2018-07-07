@@ -1,0 +1,7 @@
+Como estructuras necesarias utilizo 2 vectores para almacenar los nodos AStarNode* usados por el algoritmo A*, uno llamado 'abiertos' que contiene los que aun están por visitar y ser procesados, y el otro 'cerrados' con los que ya han sido visitados. También utilizamos otro nodo AStarNode* llamado current que representa al nodo actual y por último hacemos uso del montículo de la STL (make\_heap) para reordenar el vector abiertos cada vez que se produzca una actualización en los parámetros de un nodo current.
+
+El funcionamiento del algoritmo sigue la estructura del algoritmo A*: el nodo current es expandido y miramos sus hijos, los cuales se irán guardando en el vector de abiertos para poder visitarlos si no lo estuvieran. Los nodos que estén en este último vector se usarán para comprobar si es más conveniente ir al nodo objetivo mediante el padre del nodo actual(current) o a través del propio current. Una vez un nodo ha sido visitado se guarda en el vector de cerrados para no volver a visitarlo.
+
+Para calcular que camino es el mejor, utilizamos un coste adicional a cada celda que consiste en calcular la distancia euclídea desde cada una de ellas hasta la celda donde esta situada la defensa principal, es decir, cuanto más lejos esté, mayor valor tendrá. Para ésto hacemos uso de una matriz de float llamada additionalCost. 
+
+Finalmente, una vez hemos obtenido la solución, devolvemos el camino almacenándolo en la lista de Vector3 llamada 'path'. 
